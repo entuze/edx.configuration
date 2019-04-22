@@ -31,14 +31,14 @@ if [ -f "$COMPILER_LOCK" ]; then
   prev_launch=$(stat -c %y .compile_assets)
   echo "Cannot start: a Compile Assets process was launched at ${prev_launch:1:16}. Exiting"
   echo
-  echo "If you know this to be incorrect information then you can do a hard reset with the following command: sudo rm ${COMPILER_LOCK}" 
+  echo "If you know this to be incorrect information then you can do a hard reset with the following command: sudo rm ${COMPILER_LOCK}"
   exit
 else
   touch $COMPILER_LOCK
   echo "Asset compilation is now locked."
 fi
 
-# ensure permissions are good across all of edx-platform 
+# ensure permissions are good across all of edx-platform
 sudo chown -R edxapp /edx/app/edxapp/edx-platform
 sudo chgrp -R edxapp /edx/app/edxapp/edx-platform
 
@@ -57,7 +57,7 @@ echo "
                      |_|
   --------------------------------------------------------------
 "
-paver --quiet update_assets lms --settings=aws --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=osh
+paver --quiet update_assets lms --settings=aws --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=entuze-theme
 
 echo "
   --------------------------------------------------------------
@@ -69,7 +69,7 @@ echo "
                      |_|
   --------------------------------------------------------------
 "
-paver --quiet update_assets cms --settings=aws --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=osh
+paver --quiet update_assets cms --settings=aws --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=entuze-theme
 
 echo "
   --------------------------------------------------------------
@@ -82,7 +82,7 @@ echo "
   Making it Sassy with Sass :D
   --------------------------------------------------------------
 "
-paver compile_sass --system=lms --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=osh
+paver compile_sass --system=lms --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=entuze-theme
 
 echo "
   --------------------------------------------------------------
@@ -95,7 +95,7 @@ echo "
   Making it Sassy with Sass :D
   --------------------------------------------------------------
 "
-paver compile_sass --system=cms --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=osh
+paver compile_sass --system=cms --theme-dirs /edx/app/edxapp/edx-platform/themes --themes=entuze-theme
 
 EOF
 
@@ -108,4 +108,3 @@ now=$(date -d "-6 hours" +'%H:%M')
 echo "$now CST: finished compiling assets"
 rm $COMPILER_LOCK
 echo "Asset compilation is now unlocked."
-
