@@ -14,58 +14,67 @@
   .wrapper-footer {
     background: #2B2D34;
   }
+
+  @import "neat";
+  @import "bourbon";
+
+  * {
+    box-sizing: border-box;
+  }
+
+  .flex-container {
+    padding: 0;
+    margin: 0;
+    outline: 1px solid red;
+    margin: 2em auto;
+
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-flow: row wrap;
+    justify-content: space-around;
+  }
+
+  .flex-item {
+    background: tomato;
+    color: white;
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+    margin: 1em;
+    flex: 1 1 auto;
+    outline: 1px solid blue;
+
+    // whatever the breakpoints are that scaffold has set.
+    @media screen and (min-width: 320px) {
+     width: 100vw;
+    }
+
+    @media screen and (min-width: 640px) {
+     width: calc(50vw - 4em);
+    }
+
+    @media screen and (min-width: 960px) {
+     width: calc(25vw - 4em);
+
+      &:first-child {
+        //margin-left: auto;
+      }
+
+      &:last-child {
+        //margin-right: auto;
+      }
+    }
+
+    @media screen and (min-width: 1280px) {
+
+    }
+  }  
 </style>
 
-% if uses_bootstrap:
-  <div class="container-fluid wrapper-footer">
-    <footer>
-      <div class="row">
-        <div class="col-md-9">
-          <nav class="navbar site-nav navbar-expand-sm" aria-label="${_('About')}">
-            <ul class="navbar-nav">
-              % for item_num, link in enumerate(footer['navigation_links'], start=1):
-                <li class="nav-item">
-                  <a class="nav-link" href="${link['url']}">${link['title']}</a>
-                </li>
-              % endfor
-            </ul>
-          </nav>
 
-          ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
-          <p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
-
-          <nav class="navbar legal-nav navbar-expand-sm" aria-label="${_('Legal')}">
-            <ul class="navbar-nav">
-              % for item_num, link in enumerate(footer['legal_links'], start=1):
-                <li class="nav-item">
-                  <a class="nav-link" href="${link['url']}">${link['title']}</a>
-                </li>
-              % endfor
-              <li class="nav-item">
-                <a class="nav-link" href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <div class="col-md-3">
-          ## Please leave this link and use one of the logos provided
-          ## The OpenEdX link may be hidden when this view is served
-          ## through an API to partner sites (such as marketing sites or blogs),
-          ## which are not technically powered by Open edX.
-          % if not hide_openedx_link:
-            <div class="footer-about-openedx">
-              <p>
-                <a href="${footer['openedx_link']['url']}">
-                  <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
-                </a>
-              </p>
-            </div>
-          % endif
-        </div>
-      </div>
-    </footer>
-  </div>
-% else:
   <div class="wrapper wrapper-footer">
     <footer id="footer-openedx" class="grid-container"
       ## When rendering the footer through the branding API,
@@ -75,6 +84,14 @@
         dir=${bidi}
       % endif
     >
+      <div>
+        <div class="flex-container">
+          <div class="flex-item flex-item-1">1</div>
+          <div class="flex-item flex-item-2">2</div>
+          <div class="flex-item flex-item-3">3</div>
+          <div class="flex-item flex-item-4">4</div>
+        </div>
+      </div>
       <div class="colophon">
         <nav class="nav-colophon" aria-label="${_('About')}">
           <ol>
@@ -93,8 +110,6 @@
         <div class="wrapper-logo">
         </div>
 
-        ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
-        ##<p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
         <p class="copyright">© Entuze Enterprise Solutions. All rights reserved except where noted.</p>
 
         <nav class="nav-legal" aria-label="${_('Legal')}">
@@ -104,27 +119,13 @@
                 <a href="${link['url']}">${link['title']}</a>
               </li>
             % endfor
-            ##<li><a href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a></li>
           </ul>
         </nav>
       </div>
 
-      ## Please leave this link and use one of the logos provided
-      ## The OpenEdX link may be hidden when this view is served
-      ## through an API to partner sites (such as marketing sites or blogs),
-      ## which are not technically powered by OpenEdX.
-      % if not hide_openedx_link:
-      <div class="footer-about-openedx">
-        <p>
-          ##<a href="${footer['openedx_link']['url']}">
-          ##  <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
-          ##</a>
-        </p>
-      </div>
-      % endif
     </footer>
   </div>
-% endif
+
 % if include_dependencies:
   <%static:js group='base_vendor'/>
   <%static:css group='style-vendor'/>
