@@ -71,7 +71,7 @@
     @media screen and (min-width: 1280px) {
 
     }
-  }  
+  }
 </style>
 
 
@@ -86,41 +86,54 @@
     >
       <div>
         <div class="flex-container">
-          <div class="flex-item flex-item-1">1</div>
-          <div class="flex-item flex-item-2">2</div>
-          <div class="flex-item flex-item-3">3</div>
-          <div class="flex-item flex-item-4">4</div>
+          <div class="flex-item flex-item-1">
+            <div class="wrapper-logo">
+            </div>
+            <p>phone</p>
+            <p>email</p>
+          </div>
+          <div class="flex-item flex-item-2">
+            <p>Company</p>
+            <nav class="" aria-label="${_('About')}">
+              <ol>
+                  % for item_num, link in enumerate(footer['navigation_links'], start=1):
+                  <li class="">
+                    <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
+                  </li>
+                  % endfor
+              </ol>
+            </nav>
+          </div>
+          <div class="flex-item flex-item-3">
+            <p>Links</p>
+          </div>
+          <div class="flex-item flex-item-4">
+            <p>Others</p>
+            <nav class="" aria-label="${_('Legal')}">
+              <ul>
+                % for item_num, link in enumerate(footer['legal_links'], start=1):
+                  <li class="">
+                    <a href="${link['url']}">${link['title']}</a>
+                  </li>
+                % endfor
+              </ul>
+            </nav>
+
+          </div>
+          <div class="flex-item flex-item-4">
+            <p>Connect with us</p>
+          </div>
         </div>
       </div>
       <div class="colophon">
-        <nav class="nav-colophon" aria-label="${_('About')}">
-          <ol>
-              % for item_num, link in enumerate(footer['navigation_links'], start=1):
-              <li class="nav-colophon-0${item_num}">
-                <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
-              </li>
-              % endfor
-          </ol>
-        </nav>
 
         % if context.get('include_language_selector', footer_language_selector_is_enabled()):
             <%include file="${static.get_template_path('widgets/footer-language-selector.html')}"/>
         % endif
 
-        <div class="wrapper-logo">
-        </div>
 
         <p class="copyright">© Entuze Enterprise Solutions. All rights reserved except where noted.</p>
 
-        <nav class="nav-legal" aria-label="${_('Legal')}">
-          <ul>
-            % for item_num, link in enumerate(footer['legal_links'], start=1):
-              <li class="nav-legal-0${item_num}">
-                <a href="${link['url']}">${link['title']}</a>
-              </li>
-            % endfor
-          </ul>
-        </nav>
       </div>
 
     </footer>
