@@ -103,7 +103,7 @@
             <nav class="" aria-label="${_('About')}">
               <ol>
                   % for item_num, link in enumerate(footer['navigation_links'], start=1):
-                  <li class="">
+                  <li class="footer-links">
                     <a id="${link['name']}" href="${link['url']}">${link['title']}</a>
                   </li>
                   % endfor
@@ -118,7 +118,7 @@
             <nav class="" aria-label="${_('Legal')}">
               <ul>
                 % for item_num, link in enumerate(footer['legal_links'], start=1):
-                  <li class="">
+                  <li class="footer-links">
                     <a href="${link['url']}">${link['title']}</a>
                   </li>
                 % endfor
