@@ -9,6 +9,13 @@
 <% footer = get_footer(is_secure=is_secure) %>
 <%namespace name='static' file='static_content.html'/>
 
+## mcdaniel apr-2019: entuze footer styling
+<style>
+  .wrapper-footer {
+    background: #2B2D34;
+  }
+</style>
+
 % if uses_bootstrap:
   <div class="container-fluid wrapper-footer">
     <footer>
@@ -87,7 +94,8 @@
         </div>
 
         ## Site operators: Please do not remove this paragraph! This attributes back to edX and makes your acknowledgement of edX's trademarks clear.
-        <p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
+        ##<p class="copyright">${footer['copyright']} ${u" | {icp}".format(icp=getattr(settings,'ICP_LICENSE')) if getattr(settings,'ICP_LICENSE',False) else ""}</p>
+        <p class="copyright">© Entuze Enterprise Solutions. All rights reserved except where noted.</p>
 
         <nav class="nav-legal" aria-label="${_('Legal')}">
           <ul>
@@ -96,7 +104,7 @@
                 <a href="${link['url']}">${link['title']}</a>
               </li>
             % endfor
-            <li><a href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a></li>
+            ##<li><a href="${footer['edx_org_link']['url']}">${footer['edx_org_link']['text']}</a></li>
           </ul>
         </nav>
       </div>
@@ -108,9 +116,9 @@
       % if not hide_openedx_link:
       <div class="footer-about-openedx">
         <p>
-          <a href="${footer['openedx_link']['url']}">
-            <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
-          </a>
+          ##<a href="${footer['openedx_link']['url']}">
+          ##  <img src="${footer['openedx_link']['image']}" alt="${footer['openedx_link']['title']}" width="140" />
+          ##</a>
         </p>
       </div>
       % endif
